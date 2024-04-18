@@ -1,11 +1,11 @@
 import express, { Request, Response } from "express";
 import Hotel from "../models/hotel";
-import { /*BookingType,*/ HotelSearchResponse } from "../shared/types";
+import { BookingType, HotelSearchResponse } from "../shared/types";
 import { param, validationResult } from "express-validator";
-//import Stripe from "stripe";
+import Stripe from "stripe";
 import verifyToken from "../middleware/auth";
 
-//const stripe = new Stripe(process.env.STRIPE_API_KEY as string);
+const stripe = new Stripe(process.env.STRIPE_API_KEY as string);
 
 const router = express.Router();
 
@@ -86,7 +86,7 @@ router.get(
   }
 );
 
-/*router.post(
+router.post(
   "/:hotelId/bookings/payment-intent",
   verifyToken,
   async (req: Request, res: Response) => {
@@ -121,9 +121,9 @@ router.get(
 
     res.send(response);
   }
-);*/
+);
 
-/*router.post(
+router.post(
   "/:hotelId/bookings",
   verifyToken,
   async (req: Request, res: Response) => {
@@ -174,7 +174,7 @@ router.get(
       res.status(500).json({ message: "something went wrong" });
     }
   }
-);*/
+);
 
 const constructSearchQuery = (queryParams: any) => {
   let constructedQuery: any = {};
